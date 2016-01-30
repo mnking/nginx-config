@@ -1,0 +1,21 @@
+server {
+    listen 80;
+
+    root /var/www/html/laravel/public;
+    index index.php index.html index.htm;
+
+    server_name laravel.local;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    access_log off;
+    error_log  /var/log/error.log error;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        include fastcgi_params;
+    }
+}
+
