@@ -4,7 +4,7 @@ server {
     root /var/www/html/laravel/public;
     index index.php index.html index.htm;
 
-    server_name laravel.local;
+    server_name domain.com;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
@@ -18,4 +18,11 @@ server {
         include fastcgi_params;
     }
 }
+
+server {
+    listen       80;
+    server_name  www.domain.com;
+    return       301 http://domain.com$request_uri;
+}
+
 
